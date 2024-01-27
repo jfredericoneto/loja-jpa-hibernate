@@ -1,8 +1,11 @@
 package dev.jfredericoneto.loja.modelo;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,6 +20,18 @@ public class Produto {
     private Long id;
     private String nome;
     private String descricao;
+    private BigDecimal preco;
+    private LocalDate dataCadastro;
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
+
+    public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.dataCadastro = LocalDate.now();
+        this.categoria = categoria;
+    }
 
     public Long getId() {
         return id;
@@ -50,5 +65,19 @@ public class Produto {
         this.preco = preco;
     }
 
-    private BigDecimal preco;
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 }
